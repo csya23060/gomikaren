@@ -46,8 +46,6 @@
 
 [![YouTube Demo](https://img.youtube.com/vi/動画ID/mqdefault.jpg)](https://www.youtube.com/watch?v=動画ID)
 
-（※実際のURLは差し替えてください）
-
 ---
 
 ## 📄 ライセンス
@@ -60,7 +58,7 @@ MIT License
 
 以下のURLにアクセスするだけで使えます：
 
-👉 [https://popo.github.io/gomicale/](https://popo.github.io/gomicale/)
+👉 [https://csya23060.github.io/gomikaren/](https://csya23060.github.io/gomikaren/)
 
 ## 👤 開発者
 
