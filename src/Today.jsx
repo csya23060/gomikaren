@@ -1,11 +1,10 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { WEEKDAY_GARBAGE } from './data';
 
-export default function Today() {
+export default function Today({ weekdayGarbage }) {
   const today = dayjs();
   const weekday = today.day();
-  const garbage = WEEKDAY_GARBAGE[weekday];
+  const garbage = weekdayGarbage[weekday] || 'なし';
 
   return (
     <div style={{ backgroundColor: '#d0e7ff', padding: '1em', borderRadius: '8px', marginBottom: '1em' }}>
@@ -15,5 +14,4 @@ export default function Today() {
       </p>
     </div>
   );
-  console.log('今日の曜日:', weekday, '今日のゴミ:', garbage);
 }
