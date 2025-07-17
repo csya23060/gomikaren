@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
 
+export const WEEKDAY_GARBAGE = {
+  0: '燃えるゴミ', // 日曜日
+  1: '燃えないゴミ', // 月曜日
+  2: 'プラスチック', // 火曜日
+  3: '資源ゴミ', // 水曜日
+  4: 'ペットボトル', // 木曜日
+  5: '缶・ビン', // 金曜日
+  6: '粗大ゴミ', // 土曜日
+};
+
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
 
 export default function Calendar({
@@ -11,29 +21,19 @@ export default function Calendar({
 }) {
   const [currentMonth, setCurrentMonth] = useState(dayjs().startOf('month'));
 
-  // コメントはカレンダー内のローカル状態でOK
+  // コメントはカレンダー内ローカルでOK
   const [comments, setComments] = useState({});
-  const [userGarbage, setUserGarbage] = useState({});
 
-  // 曜日ごとのゴミ種類（初期値はWEEKDAY_GARBAGEから）
-  const [weekdayGarbage, setWeekdayGarbage] = useState(() => {
-    const init = {};
-    WEEKDAYS.forEach((wd, i) => {
-      init[i] = WEEKDAY_GARBAGE[i] || '';
-    });
-    return init;
-  });
-
-  // 編集中の日付と一時編集用状態
+  // 編集用状態
   const [editingDate, setEditingDate] = useState(null);
   const [tempComment, setTempComment] = useState('');
   const [tempGarbage, setTempGarbage] = useState('');
 
-  // 月の開始・終了日
+  // 月の開始・終了
   const start = currentMonth.startOf('month');
   const end = currentMonth.endOf('month');
 
-  // 月の日付配列作成
+  // 月の日付配列
   const days = [];
   for (let d = start; d.isBefore(end) || d.isSame(end, 'day'); d = d.add(1, 'day')) {
     days.push({
@@ -178,7 +178,6 @@ export default function Calendar({
         ))}
 
         {days.map(({ date, dayOfMonth, weekday }) => {
-          // 日付ごと利用者設定があれば優先、それ以外は曜日設定を表示
           const garbageToShow = userGarbage[date] || weekdayGarbage[weekday] || '';
 
           return (

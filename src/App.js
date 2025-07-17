@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
 import Today from './Today';
-import Calendar from './Calendar';
+import Calendar, { WEEKDAY_GARBAGE } from './Calendar';
 
 export default function App() {
-  const [weekdayGarbage, setWeekdayGarbage] = useState({
-    0: '燃えるゴミ',
-    1: '燃えないゴミ',
-    2: 'プラスチック',
-    3: '資源ゴミ',
-    4: 'ペットボトル',
-    5: '缶・ビン',
-    6: '粗大ゴミ',
-  });
+  // 曜日ごとのゴミ種類を状態で管理（初期値は定数から）
+  const [weekdayGarbage, setWeekdayGarbage] = useState(WEEKDAY_GARBAGE);
+
+  // 日付ごとの個別ゴミ設定
+  const [userGarbage, setUserGarbage] = useState({});
 
   return (
-    <div style={{ maxWidth: '700px', margin: '2em auto', padding: '0 1em', fontFamily: 'Arial, sans-serif' }}>
+    <div
+      style={{
+        maxWidth: '600px',
+        margin: '2em auto',
+        padding: '0 1em',
+        fontFamily: 'Arial, sans-serif',
+      }}
+    >
       <h1 style={{ fontWeight: 'bold', fontSize: '2em', marginBottom: '1em' }}>🧺 ゴミかれ</h1>
-      <Today weekdayGarbage={weekdayGarbage} />
-      <Calendar weekdayGarbage={weekdayGarbage} setWeekdayGarbage={setWeekdayGarbage} />
+
+      <Today weekdayGarbage={weekdayGarbage} userGarbage={userGarbage} />
+      <Calendar
+        weekdayGarbage={weekdayGarbage}
+        setWeekdayGarbage={setWeekdayGarbage}
+        userGarbage={userGarbage}
+        setUserGarbage={setUserGarbage}
+      />
     </div>
   );
 }
