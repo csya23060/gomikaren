@@ -15,4 +15,5 @@ export default function Today() {
       </p>
     </div>
   );
+  console.log('今日の曜日:', weekday, '今日のゴミ:', garbage);
 }
