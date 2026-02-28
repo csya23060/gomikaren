@@ -25,6 +25,19 @@ export default function App() {
     localStorage.setItem("weekdayGarbage", JSON.stringify(weekdayGarbage));
   }, [weekdayGarbage]);
 
+  // 🔹 今日のゴミを赤色で表示する関数
+  const getDisplayGarbage = (day) => {
+    const defaultValue = defaultGarbage[day];
+    const value = weekdayGarbage[day];
+    return value !== defaultValue ? (
+      <span style={{ color: 'red', fontWeight: 'bold' }}>{value}</span>
+    ) : (
+      <span>{value}</span>
+    );
+  };
+
+  const today = new Date().getDay();
+
   return (
     <div
       style={{
@@ -37,6 +50,12 @@ export default function App() {
       <h1 style={{ fontWeight: 'bold', fontSize: '2em', marginBottom: '1em' }}>
         🧺 ゴミかれ
       </h1>
+
+      {/* 今日のゴミを赤色表示 */}
+      <div style={{ marginBottom: '1em', fontSize: '1.2em' }}>
+        <strong>今日のゴミ:</strong> {getDisplayGarbage(today)}
+      </div>
+
       <Today weekdayGarbage={weekdayGarbage} />
       <Calendar
         weekdayGarbage={weekdayGarbage}
